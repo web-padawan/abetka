@@ -1,5 +1,6 @@
 var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+var OpenBrowserPlugin = require('open-browser-webpack-plugin');
 var webpack = require('webpack');
 
 const TARGET = process.env.npm_lifecycle_event;
@@ -42,6 +43,7 @@ module.exports = {
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
+    new OpenBrowserPlugin(),
     new webpack.NoErrorsPlugin(),
     new HtmlWebpackPlugin({
       title: 'Abetka'
