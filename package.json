@@ -4,7 +4,8 @@
   "description": "test project",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server"
+    "start": "SET NODE_ENV=development&&webpack-dev-server",
+    "build": "SET NODE_ENV=production&&webpack"
   },
   "author": "Sergey Kulikov",
   "license": "MIT",

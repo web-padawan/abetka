@@ -2,14 +2,14 @@ var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var OpenBrowserPlugin = require('open-browser-webpack-plugin');
 var webpack = require('webpack');
+var merge = require('webpack-merge');
 
-const TARGET = process.env.npm_lifecycle_event;
+const DEV = process.env.NODE_ENV === 'development';
 const PATHS = {
   app: path.join(__dirname, 'app'),
   build: path.join(__dirname, 'build')
 };
-
-module.exports = {
+const common = {
   entry: PATHS.app,
   output: {
     path: PATHS.build,
@@ -31,22 +31,44 @@ module.exports = {
         include: PATHS.app,
       }
     ]
-  },
-  devServer: {
-    historyApiFallback: true,
-    hot: true,
-    inline: true,
-    progress: true,
-    stats: 'errors-only',
-    host: process.env.HOST,
-    port: process.env.PORT
-  },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(),
-    new OpenBrowserPlugin(),
-    new webpack.NoErrorsPlugin(),
-    new HtmlWebpackPlugin({
-      title: 'Abetka'
-    })
-  ]
+  }
 };
+
+if (DEV === true) {
+  module.exports = merge(common, {
+    devServer: {
+      historyApiFallback: true,
+      hot: true,
+      inline: true,
+      progress: true,
+      stats: 'errors-only',
+      host: process.env.HOST,
+      port: process.env.PORT
+    },
+    plugins: [
+      new webpack.HotModuleReplacementPlugin(),
+      new OpenBrowserPlugin(),
+      new webpack.NoErrorsPlugin(),
+      new HtmlWebpackPlugin({
+        title: 'Abetka'
+      })
+    ]
+  });
+} else {
+  module.exports = merge(common, {
+    plugins: [
+      new webpack.optimize.DedupePlugin(),
+      new webpack.optimize.OccurenceOrderPlugin(),
+      new webpack.optimize.UglifyJsPlugin({
+        compress: {
+          warnings:     false,
+          drop_console: true,
+          unsafe:       true
+        }
+      }),
+      new HtmlWebpackPlugin({
+        title: 'Abetka'
+      })
+    ]
+  });
+}
