@@ -4,7 +4,7 @@ var OpenBrowserPlugin = require('open-browser-webpack-plugin');
 var webpack = require('webpack');
 var merge = require('webpack-merge');
 
-const DEV = process.env.NODE_ENV === 'development';
+const PROD = process.env.NODE_ENV === 'production';
 const PATHS = {
   app: path.join(__dirname, 'app'),
   build: path.join(__dirname, 'build')
@@ -34,7 +34,7 @@ const common = {
   }
 };
 
-if (DEV === true) {
+if (PROD !== true) {
   module.exports = merge(common, {
     devServer: {
       historyApiFallback: true,
