@@ -9,6 +9,7 @@ const PATHS = {
   app: path.join(__dirname, 'app'),
   build: path.join(__dirname, 'build')
 };
+
 const common = {
   entry: PATHS.app,
   output: {
@@ -46,6 +47,9 @@ if (PROD !== true) {
       port: process.env.PORT
     },
     plugins: [
+      new webpack.DefinePlugin({
+        __DEV__: JSON.stringify(JSON.parse(true))
+      }),
       new webpack.HotModuleReplacementPlugin(),
       new OpenBrowserPlugin(),
       new webpack.NoErrorsPlugin(),
@@ -57,6 +61,9 @@ if (PROD !== true) {
 } else {
   module.exports = merge(common, {
     plugins: [
+      new webpack.DefinePlugin({
+        __DEV__: JSON.stringify(JSON.parse(false))
+      }),
       new webpack.optimize.DedupePlugin(),
       new webpack.optimize.OccurenceOrderPlugin(),
       new webpack.optimize.UglifyJsPlugin({

@@ -1,15 +1,5 @@
-import { createStore } from 'redux';
-import rootReducer from '../reducers/index.js';
-
-export default function configureStore(initialState) {
-  const store = createStore(rootReducer, initialState);
-
-  if (module.hot) {
-    module.hot.accept('../reducers', () => {
-      const nextReducer = require('../reducers');
-      store.replaceReducer(nextReducer);
-    })
-  }
-
-  return store;
+if (__DEV__) {
+  module.exports = require('./configureStore.dev');
+} else {
+  module.exports = require('./configureStore.prod');
 }
