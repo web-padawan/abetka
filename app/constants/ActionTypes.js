@@ -1,1 +1,5 @@
-export const ADD_WORD = 'ADD_WORD';
+const types = {
+  ADD_WORD: 'ADD_WORD'
+}
+
+export default types;

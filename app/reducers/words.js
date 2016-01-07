@@ -1,4 +1,4 @@
-import * as types from '../actions/words';
+import types from '../constants/ActionTypes';
 
 const initialState = [];
 
