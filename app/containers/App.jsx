@@ -12,7 +12,7 @@ class App extends Component {
       <div>
         <AddWord
           onAddClick={text =>
-            dispatch(addWord(text))
+            (text.length ? dispatch(addWord(text)) : null)
           } />
         <WordList words={words} />
       </div>
