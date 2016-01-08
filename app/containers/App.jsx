@@ -12,11 +12,11 @@ class App extends Component {
 
     return (
       <div>
-        <Letters letters={letters} />
         <AddWord
           onAddClick={text =>
             (text.length ? dispatch(addWord(text)) && dispatch(updLetters(text[0].toUpperCase())) : null)
           } />
+        <Letters letters={letters} />
         <WordList words={words} />
       </div>
     );
