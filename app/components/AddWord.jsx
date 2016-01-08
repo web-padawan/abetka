@@ -2,6 +2,9 @@ import React, { Component, PropTypes } from 'react';
 import { findDOMNode } from 'react-dom';
 
 export default class AddWord extends Component {
+  static propTypes = {
+    onAddClick: PropTypes.func.isRequired
+  }
   render() {
     return (
       <div>
@@ -19,7 +22,3 @@ export default class AddWord extends Component {
     node.value = '';
   }
 }
-
-AddWord.propTypes = {
-  onAddClick: PropTypes.func.isRequired
-};
