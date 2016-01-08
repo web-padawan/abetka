@@ -1,0 +1,29 @@
+.letters {
+  list-style-type: none;
+  padding: 0;
+
+  &__item {
+    display: inline-block;
+    margin: 5px;
+    padding: 8px 12px;
+    color: #fff;
+    background: #5bc0de;
+    border: solid 1px #46b8da;
+    font-size: 20px;
+
+    &:hover {
+      background: #31b0d5;
+      border-color: #269abc;
+    }
+
+    &:nth-child(2n) {
+      background: #43ac6a;
+      border-color: #3c9a5f;
+
+      &:hover {
+        background: #358753;
+        border-color: #2b6e44;
+      }
+    }
+  }
+}

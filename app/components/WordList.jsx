@@ -11,7 +11,7 @@ export default class WordList extends Component {
     const words = this.props.words;
 
     return (
-      <ul>
+      <ul className="words">
         {words.map((word, index) =>
           <Word {...word} key={index} />
         )}

@@ -7,9 +7,9 @@ export default class AddWord extends Component {
   }
   render() {
     return (
-      <div>
-        <input type='text' ref='input' />
-        <button onClick={e => this._onClick(e)}>
+      <div className="addWord">
+        <input className="addWord__text" type='text' ref='input' />
+        <button onClick={e => this._onClick(e)} className="addWord__submit">
           Add
         </button>
       </div>

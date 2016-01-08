@@ -6,7 +6,7 @@ export default class Letters extends Component {
     const letters = this.props.letters;
 
     return (
-      <ul>
+      <ul className="letters">
         {letters.map((letter, index) =>
           <Letter letter={letter} key={index} />
         )}

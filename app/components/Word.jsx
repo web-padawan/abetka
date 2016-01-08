@@ -6,7 +6,7 @@ export default class Word extends Component {
   }
   render() {
     return (
-      <li>
+      <li className="words__item">
         {this.props.text}
       </li>
     );

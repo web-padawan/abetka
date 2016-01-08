@@ -3,6 +3,7 @@ import { render } from 'react-dom';
 import { Provider } from 'react-redux';
 import Root from './containers/Root';
 import configureStore from './store/configureStore';
+import './stylesheets/main.scss';
 
 const store = configureStore();
 
