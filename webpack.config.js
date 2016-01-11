@@ -4,7 +4,7 @@ var OpenBrowserPlugin = require('open-browser-webpack-plugin');
 var webpack = require('webpack');
 var merge = require('webpack-merge');
 
-const PROD = process.env.NODE_ENV === 'production';
+const TARGET = process.env.NODE_ENV;
 const PATHS = {
   app: path.join(__dirname, 'app'),
   build: path.join(__dirname, 'build')
@@ -39,7 +39,28 @@ const common = {
   }
 };
 
-if (PROD !== true) {
+if (TARGET === 'production') {
+  module.exports = merge(common, {
+    plugins: [
+      new webpack.DefinePlugin({
+        __DEV__: JSON.stringify(JSON.parse(false))
+      }),
+      new webpack.optimize.DedupePlugin(),
+      new webpack.optimize.OccurenceOrderPlugin(),
+      new webpack.optimize.UglifyJsPlugin({
+        compress: {
+          warnings:     false,
+          drop_console: true,
+          unsafe:       true
+        }
+      }),
+      new HtmlWebpackPlugin({
+        title: 'Abetka'
+      })
+    ]
+  })
+}
+else {
   module.exports = merge(common, {
     devServer: {
       historyApiFallback: true,
@@ -61,25 +82,5 @@ if (PROD !== true) {
         title: 'Abetka'
       })
     ]
-  });
-} else {
-  module.exports = merge(common, {
-    plugins: [
-      new webpack.DefinePlugin({
-        __DEV__: JSON.stringify(JSON.parse(false))
-      }),
-      new webpack.optimize.DedupePlugin(),
-      new webpack.optimize.OccurenceOrderPlugin(),
-      new webpack.optimize.UglifyJsPlugin({
-        compress: {
-          warnings:     false,
-          drop_console: true,
-          unsafe:       true
-        }
-      }),
-      new HtmlWebpackPlugin({
-        title: 'Abetka'
-      })
-    ]
-  });
+  })
 }
