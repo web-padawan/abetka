@@ -1,5 +1,4 @@
 import React, { Component, PropTypes } from 'react';
-import { findDOMNode } from 'react-dom';
 
 export default class AddWord extends Component {
   static propTypes = {
@@ -16,9 +15,7 @@ export default class AddWord extends Component {
     );
   }
   _onClick(e) {
-    const node = findDOMNode(this.refs.input);
-    const text = node.value.trim();
-    this.props.onAddClick(text);
-    node.value = '';
+    this.props.onAddClick(this.refs.input.value.trim());
+    this.refs.input.value = '';
   }
 }
